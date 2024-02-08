@@ -49,7 +49,6 @@ class _Quiz extends State<Quiz> {
       });
     }
   }
-  // git remote set-url origin new.git.url/here
 
   @override
   Widget build(BuildContext context) {
