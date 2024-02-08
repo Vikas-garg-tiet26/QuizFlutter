@@ -1,6 +1,7 @@
 // import 'package:app2/data/response.dart';
 import 'package:app2/data/response.dart';
 import 'package:app2/question_summary.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:app2/questions.dart';
@@ -27,6 +28,11 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final summaryData = getSummary();
+    final totalcorrectans = questions.length;
+    final correctans = summaryData.where((data) {
+      return data["userAnswer"] == data["correctanswer"];
+    }).length;
     return SizedBox(
       width: double.infinity,
       child: Column(
@@ -34,7 +40,7 @@ class ResultsScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'You answered X out of Y questions',
+            'You answered $correctans out of $totalcorrectans questions',
             style: GoogleFonts.aBeeZee(
                 color: Colors.white70,
                 fontSize: 25,
