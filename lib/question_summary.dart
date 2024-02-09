@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class QuestionSummary extends StatelessWidget {
-  const QuestionSummary(this.summaryData, {super.key});
+  const QuestionSummary(this.summaryData, this.yes, {super.key});
 
   final List<Map<String, Object>> summaryData;
   // final summarydata = summaryData;
+  final bool yes;
   @override
   Widget build(BuildContext context) {
+    Color yo = Colors.black;
+    if (yes == true) {
+      yo = Colors.blue;
+    } else {
+      yo = Colors.redAccent;
+    }
     return SizedBox(
       height: 300,
       child: SingleChildScrollView(
@@ -16,47 +22,57 @@ class QuestionSummary extends StatelessWidget {
           children: summaryData.map(
             (data) {
               return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    ((data['questionNo'] as int) + 1).toString(),
-                    style: GoogleFonts.dmSans(
-                      color: Colors.white70,
-                      fontSize: 15,
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                        backgroundColor: yo,
+                        minimumSize: const Size.fromRadius(18),
+                        foregroundColor: Colors.white),
+                    child: Text(
+                      ((data['questionNo'] as int) + 1).toString(),
+                      textAlign: TextAlign.start,
                     ),
-                    textAlign: TextAlign.center,
                   ),
                   Expanded(
-                    child: Column(
-                      children: [
-                        Text(
-                          data['questionText'] as String,
-                          style: GoogleFonts.dmSans(
-                            color: Colors.white,
-                            fontSize: 15,
+                    child: Container(
+                      padding: const EdgeInsets.only(
+                          left: 10.0, right: 2.0, bottom: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            data['questionText'] as String,
+                            style: const TextStyle(
+                                color: Color.fromARGB(255, 240, 240, 240),
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500),
+                            textAlign: TextAlign.left,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          data['userAnswer'] as String,
-                          style: GoogleFonts.dmSans(
-                            color: const Color.fromARGB(179, 242, 21, 150),
-                            fontSize: 15,
+                          Text(
+                            data['userAnswer'] as String,
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 0, 255, 208),
+                              fontSize: 15,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          data['correctanswer'] as String,
-                          style: GoogleFonts.dmSans(
-                            color: const Color.fromARGB(179, 80, 254, 5),
-                            fontSize: 15,
+                          Text(
+                            data['correctanswer'] as String,
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 80, 254, 5),
+                              fontSize: 15,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                          const SizedBox(
+                            height: 5,
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
